@@ -14,7 +14,7 @@ module.exports = {
       removeComments: true,
       removeEmptyAttributes: true
     },
-    // template: 'index.html',
+    template: 'index.html',
     inject: true,
     favicon: undefined,
   }

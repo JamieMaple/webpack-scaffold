@@ -15,23 +15,25 @@ Object.keys(common.entry).forEach(name => {
 const compiler = webpack(merge(common, {
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
-  module: [
-    {
-      test: /\.(css|sss|scss)$/,
-      use: [
-        'style-loader',
-        {
-          loader: 'css-loader',
-          options: {
-            importLoaders: 1,
-            module: true,
-            localIdentName: '[name]__[local]__[hash:base64:5]'
-          }
-        },
-        'postcss-loader'
-      ]
-    }
-  ],
+  module: {
+    rules: [
+      {
+        test: /\.(css|sss|scss)$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              module: true,
+              localIdentName: '[name]__[local]__[hash:base64:5]'
+            }
+          },
+          'postcss-loader'
+        ]
+      }
+    ]
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {

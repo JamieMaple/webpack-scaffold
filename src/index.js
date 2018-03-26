@@ -1,10 +1,16 @@
-import './other'
+import img from './components/img'
+import welcome from './components/welcome'
+import classNames from './style.scss'
 
-const bar = () => {
-  console.log('hello world')
-}
+console.log(classNames)
 
-bar()
+// ts
+
+const app = document.getElementById('app')
+app.classList.add(classNames.app)
+
+app.appendChild(img)
+app.appendChild(welcome)
 
 if (module.hot) {
   module.hot.accept()

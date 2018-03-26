@@ -19,22 +19,24 @@ const compiler = webpack(merge(common, {
       name: 'runtime'
     }
   },
-  module: [
-    {
-      test: /\.(css|sss|scss)$/,
-      use: ExtractText.extract({
-        fallback: 'style-loader',
-        use: {
-          loader: 'css-loader',
-          options: {
-            importLoaders: 1,
-            minimize: true,
-            localIdentName: '[name]__[local]__[hash:base64:5]'
-          }
-        },
-      })
-    }
-  ],
+  module: {
+    rules: [
+      {
+        test: /\.(css|sss|scss)$/,
+        use: ExtractText.extract({
+          fallback: 'style-loader',
+          use: {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              minimize: true,
+              localIdentName: '[name]__[local]__[hash:base64:5]'
+            }
+          },
+        })
+      }
+    ]
+  },
   plugins: [
     new ExtractText({
       filename: 'css/[name].css',

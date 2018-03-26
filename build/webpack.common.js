@@ -33,20 +33,24 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/,
-        use: 'url-loader',
-        options: {
-          limit: 10000,
-          publicPath: publicPath,
-          name: 'img/[name].[hash:7].[ext]',
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            publicPath: publicPath,
+            name: 'img/[name].[hash:7].[ext]',
+          }
         }
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          publicPath: publicPath,
-          name: 'fonts/[name].[hash:7].[ext]',
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            publicPath: publicPath,
+            name: 'fonts/[name].[hash:7].[ext]',
+          }
         }
       }
     ]
