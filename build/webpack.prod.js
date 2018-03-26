@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const chalk = require('chalk')
+const extractText = require('extract-text-webpack-plugin')
 const merge = require('webpack-merge')
 const cleanWebpackPlugin = require('clean-webpack-plugin')
 const progress = require('progress-bar-webpack-plugin')
@@ -23,23 +24,25 @@ const compiler = webpack(merge(common, {
     rules: [
       {
         test: /\.(css|sss|scss)$/,
-        use: ExtractText.extract({
+        use: extractText.extract({
           fallback: 'style-loader',
-          use: {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              minimize: true,
-              localIdentName: '[name]__[local]__[hash:base64:5]'
-            }
-          },
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                minimize: true,
+                modules: true,
+              }
+            },
+            'postcss-loader'
+          ]
         })
       }
     ]
   },
   plugins: [
-    new ExtractText({
-      filename: 'css/[name].css',
+    new extractText({
+      filename: 'css/[name].[hash:7].css'
     }),
     new webpack.DefinePlugin({
       'process.env': {
