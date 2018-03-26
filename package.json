@@ -1,0 +1,28 @@
+{
+  "name": "webpack-scaffold",
+  "version": "2.0.0",
+  "description": "scaffold for maple",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env process.env.NODE_ENV=development node build/webpack.dev.js",
+    "build": "cross-env process.env.NODE_ENV=production ./node_modules/.bin/webpack --config build/webpack.prod.js"
+  },
+  "keywords": [
+    "webpack"
+  ],
+  "author": "JamieMaple",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "cross-env": "^5.1.4",
+    "express": "^4.16.3",
+    "friendly-errors-webpack-plugin": "^1.6.1",
+    "html-webpack-plugin": "^3.1.0",
+    "webpack": "^4.2.0",
+    "webpack-merge": "^4.1.2",
+    "webpack-dev-middleware": "^3.0.1",
+    "webpack-hot-middleware": "^2.21.2"
+  }
+}
