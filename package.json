@@ -39,5 +39,9 @@
     "webpack-dev-middleware": "^3.0.1",
     "webpack-hot-middleware": "^2.21.2",
     "webpack-merge": "^4.1.2"
+  },
+  "dependencies": {
+    "eslint": "^4.19.1",
+    "eslint-loader": "^2.0.0"
   }
 }

@@ -2,8 +2,6 @@ import img from './components/img'
 import welcome from './components/welcome'
 import classNames from './style.scss'
 
-console.log(classNames)
-
 // ts
 
 const app = document.getElementById('app')
