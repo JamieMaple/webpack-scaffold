@@ -1,8 +1,10 @@
 import './other'
 
-;(function() {
-  console.log('Hello world')
-})()
+const bar = () => {
+  console.log('hello world')
+}
+
+bar()
 
 if (module.hot) {
   module.hot.accept()

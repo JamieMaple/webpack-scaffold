@@ -1,7 +1,9 @@
 const webpack = require('webpack')
 const chalk = require('chalk')
 const merge = require('webpack-merge')
+const cleanWebpackPlugin = require('clean-webpack-plugin')
 const progress = require('progress-bar-webpack-plugin')
+const { resolve } = require('./helpers')
 const common = require('./webpack.common')
 
 const compiler = webpack(merge(common, {
@@ -22,6 +24,10 @@ const compiler = webpack(merge(common, {
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       }
+    }),
+    new cleanWebpackPlugin(['dist'], {
+      root: resolve('.'),
+      exclude: ['build/*.js', 'src/*.js'],
     }),
     new progress({
       format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',

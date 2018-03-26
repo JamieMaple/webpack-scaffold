@@ -38,6 +38,7 @@ const app = require('express')()
 
 app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: publicPath,
+  contentBase: resolve('static/'),
   quiet: true,
   stats: {
     colors: true,
