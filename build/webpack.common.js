@@ -1,6 +1,6 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { publicPath, isDev, htmlConfig } = require('./config')
 const { resolve } = require('./helpers')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: resolve('dist'),
     publicPath: publicPath,
-    filename: 'js/[name].[hash].js'
+    filename: 'js/[name].[hash:7].js'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx']
@@ -22,9 +22,32 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: ['ts-loader'],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        use: 'url-loader',
+        options: {
+          limit: 10000,
+          publicPath: publicPath,
+          name: 'img/[name].[hash:7].[ext]',
+        }
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          publicPath: publicPath,
+          name: 'fonts/[name].[hash:7].[ext]',
+        }
       }
     ]
   }

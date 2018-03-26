@@ -8,7 +8,7 @@ const common = require('./webpack.common')
 
 const compiler = webpack(merge(common, {
   mode: 'production',
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
   optimization: {
     minimize: true,
     splitChunks: {
@@ -19,7 +19,26 @@ const compiler = webpack(merge(common, {
       name: 'runtime'
     }
   },
+  module: [
+    {
+      test: /\.(css|sss|scss)$/,
+      use: ExtractText.extract({
+        fallback: 'style-loader',
+        use: {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1,
+            minimize: true,
+            localIdentName: '[name]__[local]__[hash:base64:5]'
+          }
+        },
+      })
+    }
+  ],
   plugins: [
+    new ExtractText({
+      filename: 'css/[name].css',
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
