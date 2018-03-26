@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env process.env.NODE_ENV=development node build/webpack.dev.js",
-    "build": "cross-env process.env.NODE_ENV=production ./node_modules/.bin/webpack --config build/webpack.prod.js"
+    "build": "cross-env process.env.NODE_ENV=production node build/webpack.prod.js"
   },
   "keywords": [
     "webpack"
@@ -16,13 +16,17 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
+    "chalk": "^2.3.2",
     "cross-env": "^5.1.4",
     "express": "^4.16.3",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^3.1.0",
+    "open": "^0.0.5",
+    "progress-bar-webpack-plugin": "^1.11.0",
+    "uglifyjs-webpack-plugin": "^1.2.4",
     "webpack": "^4.2.0",
-    "webpack-merge": "^4.1.2",
     "webpack-dev-middleware": "^3.0.1",
-    "webpack-hot-middleware": "^2.21.2"
+    "webpack-hot-middleware": "^2.21.2",
+    "webpack-merge": "^4.1.2"
   }
 }

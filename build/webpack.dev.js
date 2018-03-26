@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const friendlyError = require('friendly-errors-webpack-plugin')
+const open = require('open')
 const { port, publicPath } = require('./config')
 const { resolve } = require('./helpers')
 const common = require('./webpack.common')
@@ -14,14 +15,13 @@ const compiler = webpack(merge(common, {
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   plugins: [
-    new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('development')
       }
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
+    // error emits
     new friendlyError({
       compilationSuccessInfo: {
         messages: [`You application is running here http://localhost:${port}`],
@@ -38,7 +38,14 @@ const app = require('express')()
 
 app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: publicPath,
-  quiet: true
+  quiet: true,
+  stats: {
+    colors: true,
+    modules: false,
+    modulesSort: "field",
+    entrypoints: false,
+    children: false,
+  }
 }))
 
 app.use(require('webpack-hot-middleware')(compiler, {
@@ -47,4 +54,5 @@ app.use(require('webpack-hot-middleware')(compiler, {
 
 app.listen(port, () => {
   console.log('> Starting server...')
+  open(`http://localhost:${port}`)
 })

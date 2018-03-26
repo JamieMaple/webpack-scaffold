@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: resolve('dist'),
     publicPath: publicPath,
-    filename: 'js/[name].js'
+    filename: 'js/[name].[hash].js'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx']
@@ -17,7 +17,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       ...htmlConfig
-    })
+    }),
   ],
   module: {
     rules: [
