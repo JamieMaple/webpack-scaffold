@@ -1,6 +1,5 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const ExtractText = require('extract-text-webpack-plugin')
 const friendlyError = require('friendly-errors-webpack-plugin')
 const open = require('open')
 const { port, publicPath } = require('./config')

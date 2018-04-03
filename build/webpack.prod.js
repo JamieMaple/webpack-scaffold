@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const chalk = require('chalk')
-const extractText = require('mini-css-extract-plugin')
+// bug-flag
+const miniCssExtractPlugin = require('mini-css-extract-plugin')
 const merge = require('webpack-merge')
 const cleanWebpackPlugin = require('clean-webpack-plugin')
 const progress = require('progress-bar-webpack-plugin')
@@ -11,13 +12,16 @@ const compiler = webpack(merge(common, {
   mode: 'production',
   devtool: 'cheap-module-source-map',
   optimization: {
-    minimize: true,
     splitChunks: {
-      chunks: 'all',
-      name: 'common'
-    },
-    runtimeChunk: {
-      name: 'runtime'
+      cacheGroups: {
+        vendor: {
+         test: /node_modules/,
+         chunks: 'initial',
+         name: 'vendor',
+         priority: 10,
+         enforce: true
+        }
+      }
     }
   },
   module: {
@@ -25,10 +29,11 @@ const compiler = webpack(merge(common, {
       {
         test: /\.(css|sss|scss)$/,
         use: [
-          extractText.loader,
+          miniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
+              importLoaders: 1,
               minimize: true,
               modules: true,
             }
@@ -39,7 +44,7 @@ const compiler = webpack(merge(common, {
     ]
   },
   plugins: [
-    new extractText({
+    new miniCssExtractPlugin({
       filename: 'css/[name].[hash:7].css'
     }),
     new webpack.DefinePlugin({
