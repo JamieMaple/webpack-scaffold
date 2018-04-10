@@ -32,6 +32,10 @@ module.exports = {
         use: ['ts-loader'],
       },
       {
+        test: /\.pug$/,
+        use: 'pug-loader'
+      },
+      {
         test: /\.(png|jpe?g|gif|svg)$/,
         use: {
           loader: 'url-loader',
